@@ -1,1 +1,1 @@
-# SDXL-Workflow-in-ComfyUI-Thesis-explanation
+# SDXL Workflow in ComfyUI + Thesis-explanation
