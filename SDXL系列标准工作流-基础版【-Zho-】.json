@@ -1,0 +1,1195 @@
+{
+  "last_node_id": 263,
+  "last_link_id": 378,
+  "nodes": [
+    {
+      "id": 208,
+      "type": "KSamplerAdvanced",
+      "pos": [
+        629.1914243240851,
+        711.1422579034873
+      ],
+      "size": {
+        "0": 315,
+        "1": 334
+      },
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 303,
+          "slot_index": 0
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 301,
+          "slot_index": 1
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 302
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 298
+        },
+        {
+          "name": "noise_seed",
+          "type": "INT",
+          "link": 376,
+          "widget": {
+            "name": "noise_seed",
+            "config": [
+              "INT",
+              {
+                "default": 0,
+                "min": 0,
+                "max": 18446744073709552000
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            305
+          ],
+          "shape": 3
+        }
+      ],
+      "title": "精调模型采样",
+      "properties": {
+        "Node name for S&R": "KSamplerAdvanced"
+      },
+      "widgets_values": [
+        "enable",
+        572590949018028,
+        "randomize",
+        35,
+        8,
+        "euler_ancestral",
+        "normal",
+        25,
+        1000,
+        "enable"
+      ],
+      "color": "#232",
+      "bgcolor": "#353",
+      "shape": 1
+    },
+    {
+      "id": 199,
+      "type": "CLIPTextEncodeSDXLRefiner",
+      "pos": [
+        399.1914243240848,
+        711.1422579034873
+      ],
+      "size": {
+        "0": 210,
+        "1": 130
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 300
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 377,
+          "widget": {
+            "name": "text",
+            "config": [
+              "STRING",
+              {
+                "multiline": true
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            301
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncodeSDXLRefiner"
+      },
+      "widgets_values": [
+        5,
+        1024,
+        1024,
+        ""
+      ],
+      "color": "#232",
+      "bgcolor": "#353",
+      "shape": 1
+    },
+    {
+      "id": 209,
+      "type": "CLIPTextEncodeSDXLRefiner",
+      "pos": [
+        399.1914243240848,
+        881.1422579034875
+      ],
+      "size": {
+        "0": 210,
+        "1": 130
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 299,
+          "slot_index": 0
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 378,
+          "widget": {
+            "name": "text",
+            "config": [
+              "STRING",
+              {
+                "multiline": true
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            302
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncodeSDXLRefiner"
+      },
+      "widgets_values": [
+        5,
+        1024,
+        1024,
+        ""
+      ],
+      "color": "#232",
+      "bgcolor": "#353",
+      "shape": 1
+    },
+    {
+      "id": 210,
+      "type": "VAEDecode",
+      "pos": [
+        959.1914243240859,
+        711.1422579034873
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 305,
+          "slot_index": 0
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 306,
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            304
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "color": "#322",
+      "bgcolor": "#533",
+      "shape": 1
+    },
+    {
+      "id": 211,
+      "type": "PreviewImage",
+      "pos": [
+        1519.1914243240856,
+        171.14225790348644
+      ],
+      "size": {
+        "0": 210,
+        "1": 26
+      },
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 304,
+          "slot_index": 0
+        }
+      ],
+      "title": "基础模型+精调模型",
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "color": "#232",
+      "bgcolor": "#353",
+      "shape": 1
+    },
+    {
+      "id": 202,
+      "type": "KSamplerAdvanced",
+      "pos": [
+        629.1914243240851,
+        171.14225790348644
+      ],
+      "size": {
+        "0": 315,
+        "1": 334
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 291,
+          "slot_index": 0
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 292,
+          "slot_index": 1
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 293
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 294
+        },
+        {
+          "name": "noise_seed",
+          "type": "INT",
+          "link": 375,
+          "widget": {
+            "name": "noise_seed",
+            "config": [
+              "INT",
+              {
+                "default": 0,
+                "min": 0,
+                "max": 18446744073709552000
+              }
+            ]
+          },
+          "slot_index": 4
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            295,
+            298
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "title": "基础模型采样",
+      "properties": {
+        "Node name for S&R": "KSamplerAdvanced"
+      },
+      "widgets_values": [
+        "enable",
+        55869000874274,
+        "randomize",
+        35,
+        8,
+        "euler_ancestral",
+        "normal",
+        0,
+        25,
+        "enable"
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159",
+      "shape": 1
+    },
+    {
+      "id": 205,
+      "type": "VAELoader",
+      "pos": [
+        69.19142432408486,
+        321.1422579034868
+      ],
+      "size": {
+        "0": 310,
+        "1": 60
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            306,
+            307
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "title": "全新 VAE",
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        null
+      ],
+      "color": "#322",
+      "bgcolor": "#533",
+      "shape": 1
+    },
+    {
+      "id": 200,
+      "type": "CLIPTextEncodeSDXL",
+      "pos": [
+        399.1914243240848,
+        171.14225790348644
+      ],
+      "size": {
+        "0": 210,
+        "1": 218
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 289
+        },
+        {
+          "name": "text_g",
+          "type": "STRING",
+          "link": 308,
+          "widget": {
+            "name": "text_g",
+            "config": [
+              "STRING",
+              {
+                "multiline": true,
+                "default": "CLIP_G"
+              }
+            ]
+          }
+        },
+        {
+          "name": "text_l",
+          "type": "STRING",
+          "link": 309,
+          "widget": {
+            "name": "text_l",
+            "config": [
+              "STRING",
+              {
+                "multiline": true,
+                "default": "CLIP_L"
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            292
+          ],
+          "shape": 3
+        }
+      ],
+      "title": "设定+正向",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncodeSDXL"
+      },
+      "widgets_values": [
+        4096,
+        4096,
+        0,
+        0,
+        3000,
+        3000,
+        "CLIP_G",
+        "CLIP_G"
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159",
+      "shape": 1
+    },
+    {
+      "id": 201,
+      "type": "CLIPTextEncodeSDXL",
+      "pos": [
+        399.1914243240848,
+        441.14225790348695
+      ],
+      "size": {
+        "0": 210,
+        "1": 220
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 290
+        },
+        {
+          "name": "text_g",
+          "type": "STRING",
+          "link": 310,
+          "widget": {
+            "name": "text_g",
+            "config": [
+              "STRING",
+              {
+                "multiline": true,
+                "default": "CLIP_G"
+              }
+            ]
+          }
+        },
+        {
+          "name": "text_l",
+          "type": "STRING",
+          "link": 311,
+          "widget": {
+            "name": "text_l",
+            "config": [
+              "STRING",
+              {
+                "multiline": true,
+                "default": "CLIP_L"
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            293
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "title": "设定+负向",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncodeSDXL"
+      },
+      "widgets_values": [
+        4096,
+        4096,
+        0,
+        0,
+        3000,
+        3000,
+        "CLIP_G",
+        "CLIP_G"
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159",
+      "shape": 1
+    },
+    {
+      "id": 204,
+      "type": "VAEDecode",
+      "pos": [
+        959.1914243240859,
+        171.14225790348644
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 295,
+          "slot_index": 0
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 307,
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            297
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "color": "#322",
+      "bgcolor": "#533",
+      "shape": 1
+    },
+    {
+      "id": 4,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        69.19142432408486,
+        171.14225790348644
+      ],
+      "size": {
+        "0": 310,
+        "1": 100
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            291
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            289,
+            290
+          ],
+          "slot_index": 1
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [],
+          "slot_index": 2
+        }
+      ],
+      "title": "SDXL 基础模型",
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "sd_xl_base_0.9.safetensors"
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159",
+      "shape": 1
+    },
+    {
+      "id": 11,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        69.19142432408486,
+        811.1422579034875
+      ],
+      "size": {
+        "0": 310,
+        "1": 100
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            303
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            299,
+            300
+          ],
+          "shape": 3,
+          "slot_index": 1
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [],
+          "shape": 3,
+          "slot_index": 2
+        }
+      ],
+      "title": "SDXL 精调模型",
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "sd_xl_refiner_0.9.safetensors"
+      ],
+      "color": "#232",
+      "bgcolor": "#353",
+      "shape": 1
+    },
+    {
+      "id": 203,
+      "type": "EmptyLatentImage",
+      "pos": [
+        629.1914243240851,
+        551.1422579034872
+      ],
+      "size": {
+        "0": 320,
+        "1": 110
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            294
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        1
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159",
+      "shape": 1
+    },
+    {
+      "id": 207,
+      "type": "PreviewImage",
+      "pos": [
+        1289.1914243240856,
+        171.14225790348644
+      ],
+      "size": {
+        "0": 210,
+        "1": 26
+      },
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 297,
+          "slot_index": 0
+        }
+      ],
+      "title": "基础模型",
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "color": "#2a363b",
+      "bgcolor": "#3f5159",
+      "shape": 1
+    },
+    {
+      "id": 263,
+      "type": "Note",
+      "pos": [
+        -200,
+        130
+      ],
+      "size": {
+        "0": 240,
+        "1": 140
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "title": "使用说明",
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "此工作流均使用默认模块，不存在模块缺失的现象，如果你遇到缺失警报，请将自己的comfyui更新到最新版\n"
+      ],
+      "color": "#322",
+      "bgcolor": "#533",
+      "shape": 4
+    },
+    {
+      "id": 262,
+      "type": "Note",
+      "pos": [
+        -200,
+        320
+      ],
+      "size": {
+        "0": 240,
+        "1": 110
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "title": "未来工作",
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "我会专门把之前做的中文版的输入器模块改成适用于SDXL的输入器（用于统一两个模型的各种参数输入），将会极大简化工作流界面。\n"
+      ],
+      "color": "#322",
+      "bgcolor": "#533",
+      "shape": 4
+    },
+    {
+      "id": 212,
+      "type": "PrimitiveNode",
+      "pos": [
+        69.19142432408486,
+        421.14225790348695
+      ],
+      "size": {
+        "0": 310,
+        "1": 90
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            308,
+            309,
+            377
+          ],
+          "slot_index": 0,
+          "widget": {
+            "name": "text_g",
+            "config": [
+              "STRING",
+              {
+                "multiline": true,
+                "default": "CLIP_G"
+              }
+            ]
+          }
+        }
+      ],
+      "title": "正向提示词",
+      "properties": {},
+      "widgets_values": [
+        ""
+      ],
+      "color": "#432",
+      "bgcolor": "#653",
+      "shape": 1
+    },
+    {
+      "id": 213,
+      "type": "PrimitiveNode",
+      "pos": [
+        69.19142432408486,
+        551.1422579034872
+      ],
+      "size": {
+        "0": 310,
+        "1": 100
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            310,
+            311,
+            378
+          ],
+          "slot_index": 0,
+          "widget": {
+            "name": "text_g",
+            "config": [
+              "STRING",
+              {
+                "multiline": true,
+                "default": "CLIP_G"
+              }
+            ]
+          }
+        }
+      ],
+      "title": "负向提示词",
+      "properties": {},
+      "widgets_values": [
+        ""
+      ],
+      "color": "#432",
+      "bgcolor": "#653",
+      "shape": 1
+    },
+    {
+      "id": 261,
+      "type": "PrimitiveNode",
+      "pos": [
+        69.19142432408486,
+        691.1422579034872
+      ],
+      "size": {
+        "0": 210,
+        "1": 82
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            375,
+            376
+          ],
+          "widget": {
+            "name": "noise_seed",
+            "config": [
+              "INT",
+              {
+                "default": 0,
+                "min": 0,
+                "max": 18446744073709552000
+              }
+            ]
+          },
+          "slot_index": 0
+        }
+      ],
+      "title": "种子",
+      "properties": {},
+      "widgets_values": [
+        55869000874274,
+        "fixed"
+      ],
+      "color": "#432",
+      "bgcolor": "#653",
+      "shape": 1
+    }
+  ],
+  "links": [
+    [
+      289,
+      4,
+      1,
+      200,
+      0,
+      "CLIP"
+    ],
+    [
+      290,
+      4,
+      1,
+      201,
+      0,
+      "CLIP"
+    ],
+    [
+      291,
+      4,
+      0,
+      202,
+      0,
+      "MODEL"
+    ],
+    [
+      292,
+      200,
+      0,
+      202,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      293,
+      201,
+      0,
+      202,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      294,
+      203,
+      0,
+      202,
+      3,
+      "LATENT"
+    ],
+    [
+      295,
+      202,
+      0,
+      204,
+      0,
+      "LATENT"
+    ],
+    [
+      297,
+      204,
+      0,
+      207,
+      0,
+      "IMAGE"
+    ],
+    [
+      298,
+      202,
+      0,
+      208,
+      3,
+      "LATENT"
+    ],
+    [
+      299,
+      11,
+      1,
+      209,
+      0,
+      "CLIP"
+    ],
+    [
+      300,
+      11,
+      1,
+      199,
+      0,
+      "CLIP"
+    ],
+    [
+      301,
+      199,
+      0,
+      208,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      302,
+      209,
+      0,
+      208,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      303,
+      11,
+      0,
+      208,
+      0,
+      "MODEL"
+    ],
+    [
+      304,
+      210,
+      0,
+      211,
+      0,
+      "IMAGE"
+    ],
+    [
+      305,
+      208,
+      0,
+      210,
+      0,
+      "LATENT"
+    ],
+    [
+      306,
+      205,
+      0,
+      210,
+      1,
+      "VAE"
+    ],
+    [
+      307,
+      205,
+      0,
+      204,
+      1,
+      "VAE"
+    ],
+    [
+      308,
+      212,
+      0,
+      200,
+      1,
+      "STRING"
+    ],
+    [
+      309,
+      212,
+      0,
+      200,
+      2,
+      "STRING"
+    ],
+    [
+      310,
+      213,
+      0,
+      201,
+      1,
+      "STRING"
+    ],
+    [
+      311,
+      213,
+      0,
+      201,
+      2,
+      "STRING"
+    ],
+    [
+      375,
+      261,
+      0,
+      202,
+      4,
+      "INT"
+    ],
+    [
+      376,
+      261,
+      0,
+      208,
+      4,
+      "INT"
+    ],
+    [
+      377,
+      212,
+      0,
+      199,
+      1,
+      "STRING"
+    ],
+    [
+      378,
+      213,
+      0,
+      209,
+      1,
+      "STRING"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "标准工作流",
+      "bounding": [
+        50,
+        93,
+        1705,
+        982
+      ],
+      "color": "#A88"
+    }
+  ],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}
