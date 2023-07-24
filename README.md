@@ -7,12 +7,17 @@
 
 
 ## Workflow | 工作流设计
-base 基础版
+Base 基础版
+[Download | 下载](https://github.com/ZHO-ZHO-ZHO/SDXL-Workflow-in-ComfyUI-Thesis-explanation/blob/main/SDXL%E7%B3%BB%E5%88%97%E6%A0%87%E5%87%86%E5%B7%A5%E4%BD%9C%E6%B5%81-%E5%9F%BA%E7%A1%80%E7%89%88%E3%80%90-Zho-%E3%80%91.json)
 ![Dingtalk_20230725003934](https://github.com/ZHO-ZHO-ZHO/SDXL-Workflow-in-ComfyUI-Thesis-explanation/assets/140084057/2cfabc88-73c5-4b3d-984e-fef86eed47ee)
 
-multilingual 多语言版
+
+Multilingual 多语言版
+[Download | 下载](https://github.com/ZHO-ZHO-ZHO/SDXL-Workflow-in-ComfyUI-Thesis-explanation/blob/main/SDXL%E7%B3%BB%E5%88%97%E6%A0%87%E5%87%86%E5%B7%A5%E4%BD%9C%E6%B5%81-%E5%A4%9A%E8%AF%AD%E8%A8%80%E7%89%88%E3%80%90-Zho-%E3%80%91.json)
 ![Dingtalk_20230725004022](https://github.com/ZHO-ZHO-ZHO/SDXL-Workflow-in-ComfyUI-Thesis-explanation/assets/140084057/2256e60b-8691-4884-9220-0947a5536d6d)
 Use TranslateCLIPTextEncodeNode From AlekPet | 使用AlekPet制作的TranslateCLIPTextEncodeNode模块（https://github.com/AlekPet/ComfyUI_Custom_Nodes_AlekPet）
+
+
 
 ## Thesis explanation | 论文详解
 1. SDXL系列模型
